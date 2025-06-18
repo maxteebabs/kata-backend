@@ -1,0 +1,49 @@
+{
+  "items": ["A", "B", "A", "C", "D", "A", "B"],
+  "pricingRules": [
+    {
+      "sku": "A",
+      "unitPrice": 50,
+      "quantity": 1,
+      "unit": "pence",
+      "discount": {
+        "quantity": "3",
+        "price": 130,
+        "description": "Buy 3 for £1.30",
+        "validFrom": "2023-01-01",
+        "validTo": "2023-12-31",
+        "type": "GROUP_DISCOUNT",
+        "isActive": true
+      }
+    },
+    {
+      "sku": "B",
+      "unitPrice": 30,
+      "quantity": 1,
+      "unit": "pence",
+      "discount": {
+        "quantity": "2",
+        "price": 45,
+        "description": "Buy 2 for 45p",
+        "validFrom": "2023-01-01",
+        "validTo": "2023-12-31",
+        "type": "GROUP_DISCOUNT",
+        "isActive": true
+      }
+    },
+    {
+      "sku": "C",
+      "unitPrice": 20,
+      "quantity": 1,
+      "unit": "pence",
+      "discount": null
+    },
+    {
+      "sku": "D",
+      "unitPrice": 15,
+      "quantity": 1,
+      "unit": "pence",
+      "discount": null
+    }
+  ]
+}
