@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdl.kata.common.ApiResponse;
 import com.cdl.kata.dto.CheckoutRequestDto;
+import com.cdl.kata.dto.CheckoutResponseDto;
 import com.cdl.kata.services.CheckoutService;
 
 @RestController
@@ -24,14 +26,13 @@ public class CheckoutController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity<?> checkout(@RequestBody CheckoutRequestDto request) {
+    public ResponseEntity<ApiResponse<CheckoutResponseDto>> checkout(@RequestBody CheckoutRequestDto request) {
         try {
-            ResponseEntity<?> response = checkoutService.calculateTotal(request.getItems(), request.getPricingRules());
-            // logger.info("Checkout response: {}", response.getBody());
-            return response;
+            ResponseEntity<CheckoutResponseDto> response = checkoutService.calculateTotal(request.getItems(), request.getPricingRules());
+            return ResponseEntity.ok(ApiResponse.success((CheckoutResponseDto) response.getBody()));
         } catch (Exception e) {
             logger.error("Error processing checkout request", e);
-            return ResponseEntity.status(400).body("Error processing checkout request: " + e.getMessage());
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
         }
     }
 }

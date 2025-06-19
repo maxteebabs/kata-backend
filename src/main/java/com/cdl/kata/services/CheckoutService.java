@@ -21,12 +21,12 @@ public class CheckoutService {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckoutService.class);
 
-    public ResponseEntity<?> calculateTotal(List<String> items, List<PricingRuleDto> pricingRules) {
+    public ResponseEntity<CheckoutResponseDto> calculateTotal(List<String> items, List<PricingRuleDto> pricingRules) {
         // logger.debug("Items: {}, Pricing Rules: {}", items, pricingRules);
 
         ResponseEntity<String> validationError = validateInput(items, pricingRules);
         if (validationError != null)
-            return validationError;
+            throw new IllegalArgumentException(validationError.getBody());
 
         Map<String, Long> itemsMap = items.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
